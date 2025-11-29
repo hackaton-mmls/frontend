@@ -1,18 +1,35 @@
 <script lang="ts">
 	import Icon from '$lib/components/icon.svelte';
 
-	let { icon, type, placeholder } = $props();
+	let { icon, type, placeholder, label } = $props();
 
 	let value = $state('');
 </script>
 
-<div class="input-field">
-	<Icon {icon} />
-	<span class="vbar"></span>
-	<input {type} {placeholder} autocomplete="off" bind:value />
-</div>
+{#snippet field()}
+	<div class="input-field">
+		<Icon {icon} />
+		<span class="vbar"></span>
+		<input {type} {placeholder} autocomplete="off" bind:value />
+	</div>
+{/snippet}
+
+{#if label.length === 0}
+	{@render field()}
+{:else}
+	<div class="input-fieldset">
+		<span class="label --font-rubik">{label}</span>
+		{@render field()}
+	</div>
+{/if}
 
 <style>
+	.input-fieldset {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.25rem;
+	}
 	.input-field {
 		position: relative;
 		display: flex;
@@ -36,7 +53,7 @@
 		}
 
 		input {
-			padding: 0 1rem 0 4.5rem;
+			padding: 0 1rem 0 4rem;
 			border: none;
 			flex: 1;
 			height: 100%;
@@ -50,5 +67,10 @@
 				outline: 2px solid var(--color-text);
 			}
 		}
+	}
+
+	.label {
+		font-size: 0.75rem;
+		font-weight: 600;
 	}
 </style>

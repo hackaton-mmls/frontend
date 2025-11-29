@@ -27,7 +27,7 @@
 	>
 		{#snippet left()}
 			<div class="--requires-padding">
-				<InputField icon="search" type="text" placeholder="Поиск..." />
+				<InputField icon="search" type="text" placeholder="Поиск..." label="" />
 			</div>
 			<Accordion icon="folder" title="Тема 1">Пусто</Accordion>
 			<Accordion icon="folder" title="Тема 2">

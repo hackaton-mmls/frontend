@@ -5,7 +5,9 @@
 </script>
 
 <button {onclick}>
-	<Icon {icon} />
+	{#if icon.length > 0}
+		<Icon {icon} />
+	{/if}
 	<span>{label}</span>
 	<span class="vbar"></span>
 	<Icon icon="angle_right" />

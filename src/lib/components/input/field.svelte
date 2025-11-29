@@ -1,0 +1,54 @@
+<script lang="ts">
+	import Icon from '$lib/components/icon.svelte';
+
+	let { icon, type, placeholder } = $props();
+
+	let value = $state('');
+</script>
+
+<div class="input-field">
+	<Icon {icon} />
+	<span class="vbar"></span>
+	<input {type} {placeholder} autocomplete="off" bind:value />
+</div>
+
+<style>
+	.input-field {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 1rem;
+		height: 2rem;
+		background-color: var(--color-foreground-shade);
+		border-radius: 0.5rem;
+
+		:global svg {
+			position: absolute;
+			left: 1rem;
+			top: 0.5rem;
+		}
+
+		:global .vbar {
+			position: absolute;
+			left: 3rem;
+			top: 0.5rem;
+		}
+
+		input {
+			padding: 0 1rem 0 4.5rem;
+			border: none;
+			flex: 1;
+			height: 100%;
+			background-color: transparent;
+			font-weight: 500;
+			font-size: 1rem;
+			outline: none;
+			border-radius: 0.5rem;
+
+			&:focus {
+				outline: 2px solid var(--color-text);
+			}
+		}
+	}
+</style>

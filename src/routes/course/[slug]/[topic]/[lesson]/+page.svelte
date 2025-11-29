@@ -10,11 +10,11 @@
 
 <nav class="--font-rubik">
 	<Icon icon="symbol_hashtag" />
-	<a href="?">{data.course_name}</a>
+	<a href="/course/{data.slug}">{data.course_name}</a>
 	<Icon icon="angle_right" />
-	<a href="?">{data.topic_name}</a>
+	<a href="/course/{data.slug}/{data.topic}">{data.topic_name}</a>
 	<Icon icon="angle_right" />
-	<a href="?">{data.lesson_name}</a>
+	<a href="/course/{data.slug}/{data.topic}/{data.lesson}">{data.lesson_name}</a>
 </nav>
 
 <main>

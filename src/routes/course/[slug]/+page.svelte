@@ -10,13 +10,14 @@
 	import StatusNormal from '$lib/components/status/normal.svelte';
 	import StatusPending from '$lib/components/status/pending.svelte';
 	import StatusDone from '$lib/components/status/done.svelte';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 </script>
 
 <nav class="--font-rubik">
 	<Icon icon="symbol_hashtag" />
-	<a href="?">{data.course_name}</a>
+	<a href="/course/{data.slug}">{data.course_name}</a>
 </nav>
 
 <main>
@@ -30,10 +31,14 @@
 			</div>
 			<Accordion icon="folder" title="Тема 1">Пусто</Accordion>
 			<Accordion icon="folder" title="Тема 2">
-				<NavigateButton icon="play" label="Урок 1" />
-				<NavigateButton icon="play" label="Урок 2" />
-				<NavigateButton icon="text" label="Урок 3" />
-				<NavigateButton icon="picture" label="Урок 4" />
+				<NavigateButton
+					icon="play"
+					label="Урок 1"
+					onclick={() => goto(`/course/${data.slug}/topic_1/lesson_01`)}
+				/>
+				<NavigateButton icon="play" label="Урок 2" onclick={() => {}} />
+				<NavigateButton icon="text" label="Урок 3" onclick={() => {}} />
+				<NavigateButton icon="picture" label="Урок 4" onclick={() => {}} />
 			</Accordion>
 			<Accordion icon="folder" title="Тема 3">Пусто</Accordion>
 			<Accordion icon="folder" title="Тема 4">Пусто</Accordion>

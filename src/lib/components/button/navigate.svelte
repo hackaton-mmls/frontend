@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Icon from '$lib/components/icon.svelte';
 
-	let { icon, label } = $props();
+	let { icon, label, onclick } = $props();
 </script>
 
-<button>
+<button {onclick}>
 	<Icon {icon} />
 	<span>{label}</span>
 	<span class="vbar"></span>

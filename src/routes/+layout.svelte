@@ -23,7 +23,7 @@
 	<a href="/" data-current={page.url.pathname === '/'}> Мои курсы </a>
 	<a href="/grades" data-current={page.url.pathname.startsWith('/grades')}> Оценки </a>
 	<span class="gap"></span>
-	<NavigateButton icon="user" label={user.full_name()} />
+	<NavigateButton icon="user" label={user.full_name()} onclick={() => {}} />
 </header>
 
 {@render children()}

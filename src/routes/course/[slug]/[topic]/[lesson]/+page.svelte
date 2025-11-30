@@ -30,6 +30,7 @@
 		src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
 		poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
 		width="800"
+		height="450"
 		class="--width-content"
 	>
 		<track kind="captions" />

@@ -62,6 +62,7 @@ export interface Lesson {
 	name: string;
 	timestamp: Date;
 	video?: string;
+	contents?: string;
 	attachments: Attachment[];
 }
 
@@ -132,6 +133,7 @@ export const API = {
 						timestamp: new Date(2025, 9, 25),
 						video:
 							'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
+						contents: 'Пример содержания',
 						attachments: [
 							{
 								name: 'Презентация',
@@ -153,19 +155,19 @@ export const API = {
 				name: 'Тема 3',
 				lessons: [
 					{
-						id: '001',
+						id: '002',
 						name: 'Урок 1',
 						timestamp: new Date(2025, 9, 12),
 						attachments: []
 					},
 					{
-						id: '002',
+						id: '003',
 						name: 'Урок 2',
 						timestamp: new Date(2025, 9, 27),
 						attachments: []
 					},
 					{
-						id: '003',
+						id: '004',
 						name: 'Урок 3',
 						timestamp: new Date(2025, 9, 30),
 						attachments: []
@@ -211,7 +213,7 @@ export const API = {
 			},
 			{
 				id: '003',
-				lesson: '001',
+				lesson: '002',
 				type: TaskType.SUBMISSION,
 				name: 'Презентация',
 				details: 'Тема 3: «Урок 4»',

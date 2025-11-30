@@ -3,6 +3,7 @@
 	import CardButton from '$lib/components/button/card.svelte';
 	import StatusAuto from '$lib/components/status/auto.svelte';
 	import StatusPending from '$lib/components/status/pending.svelte';
+	import StatusDone from '$lib/components/status/done.svelte';
 	import StatusFilesize from '$lib/components/status/filesize.svelte';
 	import { goto } from '$app/navigation';
 	import Main from '$lib/components/layout/main.svelte';
@@ -40,6 +41,12 @@
 			<a href={data.lesson.video}>download it</a>
 			and watch it with your favorite video player!
 		</video>
+	{/if}
+
+	{#if data.lesson.contents?.length != 0}
+		<p class="--width-content">
+			{data.lesson.contents}
+		</p>
 	{/if}
 
 	<section class="fieldset --flex-col --width-content">
@@ -94,23 +101,25 @@
 					<section class="--apply-block" style="opacity: 0.25;">Пусто</section>
 				{:else}
 					{#each tasks as task}
-						{#if task.grade == null}
-							<CardButton
-								icon={getTaskIcon(task.type)}
-								label={task.name}
-								topic={task.details}
-								is_completed={task.is_submitted}
-								onclick={() => {
-									goto(`/course/${data.course.id}/${task.type}:${task.id}`);
-								}}
-							>
-								{#if task.is_submitted}
+						<CardButton
+							icon={getTaskIcon(task.type)}
+							label={task.name}
+							topic={task.details}
+							is_completed={task.is_submitted}
+							onclick={() => {
+								goto(`/course/${data.course.id}/${task.type}:${task.id}`);
+							}}
+						>
+							{#if task.is_submitted}
+								{#if task.grade == null}
 									<StatusPending />
 								{:else}
-									<StatusAuto timestamp={task.timestamp} />
+									<StatusDone grade={task.grade} />
 								{/if}
-							</CardButton>
-						{/if}
+							{:else}
+								<StatusAuto timestamp={task.timestamp} />
+							{/if}
+						</CardButton>
 					{/each}
 				{/if}
 			{:catch error}

@@ -207,6 +207,11 @@ export const API = {
 		];
 	},
 
+	async getTask(course: string, task: string): Promise<Task> {
+		const tasks = await this.getCourseTasks(course);
+		return tasks.filter((value) => value.id === task).at(0) as Task;
+	},
+
 	async getLessonTasks(course: string, lesson: string): Promise<Task[]> {
 		const tasks = await this.getCourseTasks(course);
 		return tasks.filter((value) => value.lesson === lesson);
@@ -226,7 +231,9 @@ export const API = {
 				details: 'Тема 1: «Урок 1»',
 				is_submitted: false,
 				timestamp: new Date(2025, 11, 15),
-				task: {}
+				task: {
+					min_words: 100
+				}
 			},
 			{
 				id: '002',
@@ -236,7 +243,9 @@ export const API = {
 				details: 'Тема 2: «Урок 4»',
 				is_submitted: true,
 				timestamp: new Date(2025, 11, 15),
-				task: {}
+				task: {
+					min_words: 100
+				}
 			},
 			{
 				id: '003',
@@ -259,7 +268,9 @@ export const API = {
 						is_read: false
 					}
 				},
-				task: {}
+				task: {
+					min_words: 100
+				}
 			}
 		];
 	}

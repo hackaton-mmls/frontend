@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getTimeDiffString } from '$lib';
+	import type { EssayTask } from '$lib/api.js';
 	import Navigate from '$lib/components/button/navigate.svelte';
 	import Icon from '$lib/components/icon.svelte';
 	import Main from '$lib/components/layout/main.svelte';
@@ -6,25 +8,38 @@
 
 	let { data } = $props();
 
-	const min_length = 200;
+	const min_words = (data.task.task as EssayTask).min_words;
 	let essay = $state('');
+	let percentage = $derived(() => {
+		const words = essay.length === 0 ? [] : essay.split(' ');
+		return Math.min(Math.round((words.length / min_words) * 100), 100);
+	});
 </script>
 
+<nav class="--font-rubik --flex-row --pad --gaps">
+	<Icon icon="symbol_hashtag" />
+	<a href="/course/{data.course.id}">{data.course.name}</a>
+	<Icon icon="angle_right" />
+	<a href="?">Домашние задания</a>
+	<Icon icon="angle_right" />
+	<a href="?">{data.task.name} — {data.task.details}</a>
+</nav>
+
 <header class="tracker --flex-row --pad-even --gaps-double">
-	<ProgressBar percentage={Math.min(Math.round((essay.length / min_length) * 100), 100)} />
+	<ProgressBar percentage={percentage()} />
 	<span class="--font-rubik --flex-row --gaps-half">
 		<Icon icon="clock" />
-		00:11:00
+		{getTimeDiffString(new Date(), data.task.timestamp)}
 	</span>
 </header>
 <Main>
 	<div class="--flex-col --width-content">
-		<h1>{data.task_name}</h1>
-		<h3>«{data.topic_name}: {data.lesson_name}»</h3>
+		<h1>{data.task.name}</h1>
+		<h3>{data.task.details}</h3>
 	</div>
 	<textarea class="--width-content-padded" placeholder="Пишите здесь..." bind:value={essay}
 	></textarea>
-	{#if essay.length > min_length}
+	{#if percentage() === 100}
 		<section class="--flex-row-reverse --width-content">
 			<Navigate icon="file" label="Отправить" onclick={() => {}} />
 		</section>

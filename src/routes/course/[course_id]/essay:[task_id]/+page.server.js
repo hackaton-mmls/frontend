@@ -1,14 +1,19 @@
-export function load({ params }) {
+import { API } from '$lib/api';
+import { error } from '@sveltejs/kit';
+
+export async function load({ params }) {
+	const course = await API.getCourse(params.course_id);
+	if (course == null) {
+		error(404, `Unknown course id=${params.course_id}`);
+	}
+
+	const task = await API.getTask(course.id, params.task_id);
+	if (task == null) {
+		error(404, `Unknown task id=${params.task_id}`);
+	}
+
 	return {
-		slug: params.slug,
-		topic: params.topic,
-		lesson: params.lesson,
-		task_id: params.task_id,
-		course_name: 'Математика',
-		topic_name: 'Тема 1',
-		lesson_name: 'Списки и кортежи',
-		timestamp: new Date(),
-		task_type: 'test',
-		task_name: 'Тест 1'
+		course: course,
+		task: task
 	};
 }

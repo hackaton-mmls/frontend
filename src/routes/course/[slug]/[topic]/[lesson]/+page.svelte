@@ -107,7 +107,7 @@
 </Main>
 
 <style>
-	main > header {
+	:global main > header {
 		h1,
 		h3 {
 			margin: 0;

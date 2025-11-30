@@ -3,9 +3,11 @@
 	import Main from '$lib/components/layout/main.svelte';
 	import ProgressBar from '$lib/components/progress_bar.svelte';
 	import CardButton from '$lib/components/button/card.svelte';
-	import StatusNormal from '$lib/components/status/normal.svelte';
+	import StatusAuto from '$lib/components/status/auto.svelte';
 	import StatusPending from '$lib/components/status/pending.svelte';
-	import { getUserFullName } from '$lib/api.js';
+	import StatusDone from '$lib/components/status/done.svelte';
+	import { API, getTaskIcon, getUserFullName } from '$lib/api.js';
+	import Spinner from '$lib/components/spinner.svelte';
 
 	let { data } = $props();
 </script>
@@ -18,54 +20,76 @@
 				<h2 class="--font-rubik">Иван Иванов</h2>
 				<div class="--flex-row --gaps-half">
 					<span>Успеваемость:</span>
-					<ProgressBar percentage={85} />
+					{#await API.getUserPerformance()}
+						<Spinner />
+					{:then performance}
+						<ProgressBar percentage={performance} />
+					{:catch error}
+						<span class="error-label">
+							<Icon icon="exclamation" />
+							Ошибка: {error.message}
+						</span>
+					{/await}
 				</div>
 			</div>
 		</header>
 	</section>
 
-	<div class="--flex-col">
-		<header class="--apply-block">
-			<Icon icon="symbol_hashtag" />
-			<a class="subject-label --font-rubik" href="/course/math">Математика</a>
-			<span class="gap"></span>
-			<ProgressBar percentage={85} is_inverted={true} />
-		</header>
-		<section class="tasks --apply-foreground --width-content">
-			<section class="--flex-col">
-				<CardButton
-					icon="file"
-					label="Тест"
-					topic="Тема 1: «Урок 1»"
-					is_completed="false"
-					onclick={() => {}}
-				>
-					<StatusNormal timestamp={new Date(2025, 11, 15)} />
-				</CardButton>
-				<CardButton
-					icon="file"
-					label="Тест"
-					topic="Тема 4: «Урок 1»"
-					is_completed="true"
-					onclick={() => {}}
-				>
-					<StatusPending />
-				</CardButton>
-			</section>
-		</section>
-	</div>
-
-	<div class="--flex-col">
-		<header class="--apply-block">
-			<Icon icon="symbol_hashtag" />
-			<a class="subject-label --font-rubik" href="/course/basic">Базовый Курс</a>
-			<span class="gap"></span>
-			<ProgressBar percentage={100} is_inverted={true} />
-		</header>
-		<section class="tasks --apply-foreground --width-content">
-			<section class="--apply-block" style="opacity: 0.25;">Пусто</section>
-		</section>
-	</div>
+	{#await API.getCourses()}
+		<Spinner />
+	{:then courses}
+		{#each courses as course}
+			<div class="--flex-col">
+				<header class="--apply-block">
+					<Icon icon="symbol_hashtag" />
+					<a class="subject-label --font-rubik" href="/course/{course.id}">{course.name}</a>
+					<span class="gap"></span>
+					<ProgressBar percentage={course.performance} is_inverted={true} />
+				</header>
+				<section class="tasks --apply-foreground --width-content">
+					{#await API.getCourseTasks(course.id)}
+						<Spinner />
+					{:then tasks}
+						{#if tasks.length === 0}
+							<section class="--apply-block" style="opacity: 0.25;">Пусто</section>
+						{:else}
+							<section class="--flex-col">
+								{#each tasks as task}
+									<CardButton
+										icon={getTaskIcon(task.type)}
+										label={task.name}
+										topic={task.details}
+										is_completed={task.is_submitted}
+										onclick={() => {}}
+									>
+										{#if task.grade == null}
+											{#if task.is_submitted}
+												<StatusPending />
+											{:else}
+												<StatusAuto timestamp={task.timestamp} />
+											{/if}
+										{:else}
+											<StatusDone grade={task.grade} />
+										{/if}
+									</CardButton>
+								{/each}
+							</section>
+						{/if}
+					{:catch error}
+						<span class="error-label">
+							<Icon icon="exclamation" />
+							Ошибка: {error.message}
+						</span>
+					{/await}
+				</section>
+			</div>
+		{/each}
+	{:catch error}
+		<span class="error-label">
+			<Icon icon="exclamation" />
+			Ошибка: {error.message}
+		</span>
+	{/await}
 </Main>
 
 <style>

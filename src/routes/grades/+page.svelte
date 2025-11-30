@@ -33,7 +33,7 @@
 					is_completed="true"
 					onclick={() => {}}
 				>
-					<StatusDone result={4} />
+					<StatusDone grade={{ value: 4, max: 5 }} />
 					<span class="notification"></span>
 				</CardButton>
 				<CardButton
@@ -43,7 +43,7 @@
 					is_completed="true"
 					onclick={() => {}}
 				>
-					<StatusDone result={5} />
+					<StatusDone grade={{ value: 4, max: 5 }} />
 				</CardButton>
 			</section>
 		</section>
@@ -74,7 +74,7 @@
 					is_completed="true"
 					onclick={() => {}}
 				>
-					<StatusDone result={4} />
+					<StatusDone grade={{ value: 4, max: 5 }} />
 				</CardButton>
 				<CardButton
 					icon="file"
@@ -83,7 +83,7 @@
 					is_completed="true"
 					onclick={() => {}}
 				>
-					<StatusDone result={5} />
+					<StatusDone grade={{ value: 4, max: 5 }} />
 				</CardButton>
 			</section>
 		</section>

@@ -114,6 +114,18 @@
 			font-size: 1rem;
 		}
 
+		.error-label {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 0.5rem;
+			background-color: var(--color-red);
+			padding: 0.25rem 0.5rem;
+			font-size: 0.75rem;
+			font-weight: 600;
+			border-radius: 0.5rem;
+		}
+
 		.gap {
 			flex: 1;
 			display: block;

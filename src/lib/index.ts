@@ -10,7 +10,13 @@ export function getTimeDiff(date1: Date, date2: Date): number {
 
 export function getTimeDiffString(date1: Date, date2: Date): string {
 	const diff = getTimeDiff(date1, date2);
-	if (diff <= 1) {
+	if (diff < 0) {
+		return `опоздали на ${diff * -1} дней`;
+	}
+	if (diff == 0) {
+		return `осталось ${diff} дней`;
+	}
+	if (diff == 1) {
 		return `остался ${diff} день`;
 	}
 	if (diff <= 4) {

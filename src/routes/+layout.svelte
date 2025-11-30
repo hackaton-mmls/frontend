@@ -3,6 +3,7 @@
 	import { page } from '$app/state';
 	import NavigateButton from '$lib/components/button/navigate.svelte';
 	import { USER } from '$lib';
+	import { goto } from '$app/navigation';
 	let { children } = $props();
 </script>
 
@@ -15,7 +16,13 @@
 	<a href="/" data-current={page.url.pathname === '/'}> Мои курсы </a>
 	<a href="/grades" data-current={page.url.pathname.startsWith('/grades')}> Оценки </a>
 	<span class="gap"></span>
-	<NavigateButton icon="user" label={USER.full_name()} onclick={() => {}} />
+	<NavigateButton
+		icon="user"
+		label={USER.full_name()}
+		onclick={() => {
+			goto('/profile');
+		}}
+	/>
 </header>
 
 {@render children()}

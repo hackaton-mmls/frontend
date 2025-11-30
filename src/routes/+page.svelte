@@ -6,7 +6,6 @@
 	import CardButton from '$lib/components/button/card.svelte';
 	import StatusNormal from '$lib/components/status/normal.svelte';
 	import StatusPending from '$lib/components/status/pending.svelte';
-	import { goto } from '$app/navigation';
 </script>
 
 <Main>

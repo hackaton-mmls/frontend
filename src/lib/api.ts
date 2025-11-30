@@ -11,9 +11,9 @@ export interface Course {
 }
 
 export enum TaskType {
-	TEST,
-	SUBMISSION,
-	ESSAY
+	TEST = 'test',
+	SUBMISSION = 'submission',
+	ESSAY = 'essay'
 }
 
 export function getTaskIcon(type: TaskType) {

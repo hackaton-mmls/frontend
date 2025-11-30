@@ -8,6 +8,7 @@
 	import StatusDone from '$lib/components/status/done.svelte';
 	import { API, getTaskIcon, getUserFullName } from '$lib/api.js';
 	import Spinner from '$lib/components/spinner.svelte';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 </script>
@@ -60,7 +61,9 @@
 										label={task.name}
 										topic={task.details}
 										is_completed={task.is_submitted}
-										onclick={() => {}}
+										onclick={() => {
+											goto(`/course/${course.id}/${task.type}:${task.id}`);
+										}}
 									>
 										{#if task.grade == null}
 											{#if task.is_submitted}

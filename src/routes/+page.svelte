@@ -1,17 +1,19 @@
 <script lang="ts">
-	import { USER } from '$lib';
 	import Icon from '$lib/components/icon.svelte';
 	import Main from '$lib/components/layout/main.svelte';
 	import ProgressBar from '$lib/components/progress_bar.svelte';
 	import CardButton from '$lib/components/button/card.svelte';
 	import StatusNormal from '$lib/components/status/normal.svelte';
 	import StatusPending from '$lib/components/status/pending.svelte';
+	import { getUserFullName } from '$lib/api.js';
+
+	let { data } = $props();
 </script>
 
 <Main>
 	<section class="--apply-foreground --width-content-padded">
 		<header class="--flex-row --gaps">
-			<div class="avatar --flex-row --font-rubik">{USER.full_name().charAt(0)}</div>
+			<div class="avatar --flex-row --font-rubik">{getUserFullName(data.user).charAt(0)}</div>
 			<div class="--flex-col" style="width: 50%;">
 				<h2 class="--font-rubik">Иван Иванов</h2>
 				<div class="--flex-row --gaps-half">

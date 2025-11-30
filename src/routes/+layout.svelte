@@ -2,9 +2,9 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/state';
 	import NavigateButton from '$lib/components/button/navigate.svelte';
-	import { USER } from '$lib';
 	import { goto } from '$app/navigation';
-	let { children } = $props();
+	import { getUserFullName } from '$lib/api';
+	let { children, data } = $props();
 </script>
 
 <svelte:head>
@@ -18,7 +18,7 @@
 	<span class="gap"></span>
 	<NavigateButton
 		icon="user"
-		label={USER.full_name()}
+		label={getUserFullName(data.user)}
 		onclick={() => {
 			goto('/profile');
 		}}

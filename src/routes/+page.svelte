@@ -16,6 +16,7 @@
 			</div>
 		</header>
 	</section>
+	<a href="/course/math">Go to Math</a>
 </main>
 
 <style>

@@ -56,25 +56,23 @@
 						{:else}
 							<section class="--flex-col">
 								{#each tasks as task}
-									<CardButton
-										icon={getTaskIcon(task.type)}
-										label={task.name}
-										topic={task.details}
-										is_completed={task.is_submitted}
-										onclick={() => {
-											goto(`/course/${course.id}/${task.type}:${task.id}`);
-										}}
-									>
-										{#if task.grade == null}
+									{#if task.grade == null}
+										<CardButton
+											icon={getTaskIcon(task.type)}
+											label={task.name}
+											topic={task.details}
+											is_completed={task.is_submitted}
+											onclick={() => {
+												goto(`/course/${course.id}/${task.type}:${task.id}`);
+											}}
+										>
 											{#if task.is_submitted}
 												<StatusPending />
 											{:else}
 												<StatusAuto timestamp={task.timestamp} />
 											{/if}
-										{:else}
-											<StatusDone grade={task.grade} />
-										{/if}
-									</CardButton>
+										</CardButton>
+									{/if}
 								{/each}
 							</section>
 						{/if}

@@ -29,9 +29,16 @@ export function getTaskIcon(type: TaskType) {
 	}
 }
 
+export interface Comment {
+	author: User;
+	contents: string;
+	is_read: boolean;
+}
+
 export interface Grade {
 	value: number;
 	max: number;
+	comment?: Comment;
 }
 
 export interface Task {
@@ -173,7 +180,16 @@ export const API = {
 				timestamp: new Date(2025, 11, 15),
 				grade: {
 					value: 4,
-					max: 5
+					max: 5,
+					comment: {
+						author: {
+							email: 'teacher@example.edu',
+							first_name: 'Анна',
+							last_name: 'Ивановна'
+						},
+						contents: 'Пример комментария от учителя.',
+						is_read: false
+					}
 				}
 			}
 		];

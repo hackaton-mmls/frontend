@@ -16,16 +16,16 @@ export function getTimeDiffString(date1: Date, date2: Date): string {
 	if (diff == 0) {
 		// https://stackoverflow.com/a/13904120
 		let delta = Math.abs((date2 as any) - (date1 as any)) / 1000;
-		let days = Math.floor(delta / 86400);
+		const days = Math.floor(delta / 86400);
 		delta -= days * 86400;
 
-		let hours = Math.floor(delta / 3600) % 24;
+		const hours = Math.floor(delta / 3600) % 24;
 		delta -= hours * 3600;
 
-		let minutes = Math.floor(delta / 60) % 60;
+		const minutes = Math.floor(delta / 60) % 60;
 		delta -= minutes * 60;
 
-		let seconds = Math.floor(delta % 60); // in theory the modulus is not required
+		const seconds = Math.floor(delta % 60); // in theory the modulus is not required
 
 		return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 	}

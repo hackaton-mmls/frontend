@@ -34,6 +34,7 @@
 					onclick={() => {}}
 				>
 					<StatusDone result={4} />
+					<span class="notification"></span>
 				</CardButton>
 				<CardButton
 					icon="file"
@@ -88,3 +89,16 @@
 		</section>
 	</div>
 </Main>
+
+<style>
+	.notification {
+		display: block;
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 100%;
+		background-color: var(--color-notification);
+		outline: 4px solid var(--color-foreground);
+		margin-left: -1.5rem;
+		margin-top: -1.5rem;
+	}
+</style>

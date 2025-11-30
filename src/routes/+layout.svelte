@@ -42,6 +42,7 @@
 			--color-blue: #81b3ff;
 			--color-green: #99ffa8;
 			--color-link: #1a40db;
+			--color-notification: #cc1e1e;
 		}
 
 		html,

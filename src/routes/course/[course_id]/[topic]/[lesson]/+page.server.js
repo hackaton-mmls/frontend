@@ -1,6 +1,6 @@
 export function load({ params }) {
 	return {
-		slug: params.slug,
+		slug: params.course_id,
 		topic: params.topic,
 		lesson: params.lesson,
 		course_name: 'Математика',

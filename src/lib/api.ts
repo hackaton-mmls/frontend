@@ -1,3 +1,5 @@
+import { fail } from '@sveltejs/kit';
+
 export interface User {
 	email: string;
 	first_name: string;
@@ -42,6 +44,18 @@ export interface Task {
 	grade?: Grade;
 }
 
+export interface Lesson {
+	id: string;
+	name: string;
+	timestamp: Date;
+}
+
+export interface Topic {
+	id: string;
+	name: string;
+	lessons: Lesson[];
+}
+
 export function getUserFullName(user: User): string {
 	return user.first_name + ' ' + user.last_name;
 }
@@ -61,6 +75,11 @@ export const API = {
 		return 85;
 	},
 
+	async getCourse(id: string): Promise<Course | undefined> {
+		const courses = await this.getCourses();
+		return courses.filter((value) => value.id === id).at(0);
+	},
+
 	async getCourses(): Promise<Course[]> {
 		return [
 			{
@@ -72,6 +91,53 @@ export const API = {
 				id: 'basic',
 				name: 'Базовый Курс',
 				performance: 100
+			}
+		];
+	},
+
+	async getCourseTopics(course: string): Promise<Topic[]> {
+		return [
+			{
+				id: '001',
+				name: 'Тема 1',
+				lessons: []
+			},
+			{
+				id: '002',
+				name: 'Тема 2',
+				lessons: [
+					{
+						id: '001',
+						name: 'Урок 1',
+						timestamp: new Date(2025, 9, 25)
+					}
+				]
+			},
+			{
+				id: '003',
+				name: 'Тема 3',
+				lessons: [
+					{
+						id: '001',
+						name: 'Урок 1',
+						timestamp: new Date(2025, 9, 12)
+					},
+					{
+						id: '002',
+						name: 'Урок 2',
+						timestamp: new Date(2025, 9, 27)
+					},
+					{
+						id: '003',
+						name: 'Урок 3',
+						timestamp: new Date(2025, 9, 30)
+					}
+				]
+			},
+			{
+				id: '003',
+				name: 'Тема 3',
+				lessons: []
 			}
 		];
 	},

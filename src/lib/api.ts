@@ -1,5 +1,3 @@
-import { fail } from '@sveltejs/kit';
-
 export interface User {
 	email: string;
 	first_name: string;
@@ -43,6 +41,7 @@ export interface Grade {
 
 export interface Task {
 	id: string;
+	lesson: string;
 	type: TaskType;
 	name: string;
 	details: string;
@@ -51,10 +50,19 @@ export interface Task {
 	grade?: Grade;
 }
 
+export interface Attachment {
+	name: string;
+	url: string;
+	is_download: boolean;
+	file_size?: number;
+}
+
 export interface Lesson {
 	id: string;
 	name: string;
 	timestamp: Date;
+	video?: string;
+	attachments: Attachment[];
 }
 
 export interface Topic {
@@ -102,6 +110,11 @@ export const API = {
 		];
 	},
 
+	async getCourseTopic(course: string, topic: string): Promise<Topic> {
+		const topics = await this.getCourseTopics(course);
+		return topics.find((value) => value.id === topic) as Topic;
+	},
+
 	async getCourseTopics(course: string): Promise<Topic[]> {
 		return [
 			{
@@ -116,7 +129,22 @@ export const API = {
 					{
 						id: '001',
 						name: 'Урок 1',
-						timestamp: new Date(2025, 9, 25)
+						timestamp: new Date(2025, 9, 25),
+						video:
+							'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4',
+						attachments: [
+							{
+								name: 'Презентация',
+								url: '/example_file.pdf',
+								is_download: true,
+								file_size: 1.2 * 1024 * 1024
+							},
+							{
+								name: 'Хакатон 2025',
+								url: 'https://changellenge.com/championships/khakaton-hack-change-2025/',
+								is_download: false
+							}
+						]
 					}
 				]
 			},
@@ -127,17 +155,20 @@ export const API = {
 					{
 						id: '001',
 						name: 'Урок 1',
-						timestamp: new Date(2025, 9, 12)
+						timestamp: new Date(2025, 9, 12),
+						attachments: []
 					},
 					{
 						id: '002',
 						name: 'Урок 2',
-						timestamp: new Date(2025, 9, 27)
+						timestamp: new Date(2025, 9, 27),
+						attachments: []
 					},
 					{
 						id: '003',
 						name: 'Урок 3',
-						timestamp: new Date(2025, 9, 30)
+						timestamp: new Date(2025, 9, 30),
+						attachments: []
 					}
 				]
 			},
@@ -149,6 +180,11 @@ export const API = {
 		];
 	},
 
+	async getLessonTasks(course: string, lesson: string): Promise<Task[]> {
+		const tasks = await this.getCourseTasks(course);
+		return tasks.filter((value) => value.lesson === lesson);
+	},
+
 	async getCourseTasks(course: string): Promise<Task[]> {
 		if (course !== 'math') {
 			return [];
@@ -157,6 +193,7 @@ export const API = {
 		return [
 			{
 				id: '001',
+				lesson: '001',
 				type: TaskType.TEST,
 				name: 'Тест',
 				details: 'Тема 1: «Урок 1»',
@@ -165,6 +202,7 @@ export const API = {
 			},
 			{
 				id: '002',
+				lesson: '001',
 				type: TaskType.ESSAY,
 				name: 'Сочинение',
 				details: 'Тема 2: «Урок 4»',
@@ -173,6 +211,7 @@ export const API = {
 			},
 			{
 				id: '003',
+				lesson: '001',
 				type: TaskType.SUBMISSION,
 				name: 'Презентация',
 				details: 'Тема 3: «Урок 4»',

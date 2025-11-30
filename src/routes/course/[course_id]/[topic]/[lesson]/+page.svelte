@@ -1,45 +1,46 @@
 <script lang="ts">
 	import Icon from '$lib/components/icon.svelte';
 	import CardButton from '$lib/components/button/card.svelte';
-	import StatusNormal from '$lib/components/status/normal.svelte';
+	import StatusAuto from '$lib/components/status/auto.svelte';
 	import StatusPending from '$lib/components/status/pending.svelte';
 	import StatusFilesize from '$lib/components/status/filesize.svelte';
 	import { goto } from '$app/navigation';
 	import Main from '$lib/components/layout/main.svelte';
+	import { API, getTaskIcon } from '$lib/api.js';
+	import Spinner from '$lib/components/spinner.svelte';
 
 	let { data } = $props();
 </script>
 
 <nav class="--font-rubik --flex-row --pad --gaps">
 	<Icon icon="symbol_hashtag" />
-	<a href="/course/{data.slug}">{data.course_name}</a>
+	<a href="/course/{data.course.id}">{data.course.name}</a>
 	<Icon icon="angle_right" />
-	<a href="/course/{data.slug}/{data.topic}">{data.topic_name}</a>
+	<a href="/course/{data.course.id}/{data.topic.id}">{data.topic.name}</a>
 	<Icon icon="angle_right" />
-	<a href="/course/{data.slug}/{data.topic}/{data.lesson}">{data.lesson_name}</a>
+	<a href="/course/{data.course.id}/{data.topic.id}/{data.lesson.id}">{data.lesson.name}</a>
 </nav>
 
 <Main>
 	<header class="--flex-col --width-content">
-		<h1 class="--font-rubik">{data.lesson_name}</h1>
+		<h1 class="--font-rubik">{data.lesson.name}</h1>
 		<h3>
-			{data.timestamp.toLocaleString('ru-RU', { day: '2-digit', month: 'long', year: 'numeric' })}
+			{data.lesson.timestamp.toLocaleString('ru-RU', {
+				day: '2-digit',
+				month: 'long',
+				year: 'numeric'
+			})}
 		</h3>
 	</header>
 
-	<video
-		controls
-		src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
-		poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
-		width="800"
-		height="450"
-		class="--width-content"
-	>
-		<track kind="captions" />
-		Sorry, your browser doesn't support embedded videos, but don't worry, you can
-		<a href="https://archive.org/details/BigBuckBunny_124">download it</a>
-		and watch it with your favorite video player!
-	</video>
+	{#if data.lesson.video != null}
+		<video controls src={data.lesson.video} width="800" height="450" class="--width-content">
+			<track kind="captions" />
+			Sorry, your browser doesn't support embedded videos, but don't worry, you can
+			<a href={data.lesson.video}>download it</a>
+			and watch it with your favorite video player!
+		</video>
+	{/if}
 
 	<section class="fieldset --flex-col --width-content">
 		<header class="--font-rubik --apply-block">
@@ -47,33 +48,37 @@
 			<span>Материалы к уроку</span>
 		</header>
 		<section class="--flex-col">
-			<CardButton
-				icon="picture"
-				label="Презентация"
-				topic=""
-				is_completed="false"
-				onclick={() => {}}
-			>
-				<StatusFilesize filesize={1.2 * 1024 * 1024} />
-			</CardButton>
-			<CardButton
-				icon="popup"
-				label="yandex.ru/some_additional_material"
-				topic=""
-				is_completed="false"
-				onclick={() => {}}
-			>
-				{#snippet children()}{/snippet}
-			</CardButton>
-			<CardButton
-				icon="popup"
-				label="yandex.ru/some_additional_material"
-				topic=""
-				is_completed="false"
-				onclick={() => {}}
-			>
-				{#snippet children()}{/snippet}
-			</CardButton>
+			{#if data.lesson.attachments.length === 0}
+				<section class="--apply-block" style="opacity: 0.25;">Пусто</section>
+			{:else}
+				{#each data.lesson.attachments as attachment}
+					{#if attachment.is_download}
+						<CardButton
+							icon="picture"
+							label={attachment.name}
+							topic=""
+							is_completed="false"
+							onclick={() => {
+								window.location.assign(attachment.url);
+							}}
+						>
+							<StatusFilesize filesize={attachment.file_size || 0} />
+						</CardButton>
+					{:else}
+						<CardButton
+							icon="popup"
+							label={attachment.name}
+							topic=""
+							is_completed="false"
+							onclick={() => {
+								window.location.assign(attachment.url);
+							}}
+						>
+							{#snippet children()}{/snippet}
+						</CardButton>
+					{/if}
+				{/each}
+			{/if}
 		</section>
 	</section>
 	<section class="fieldset --flex-col --width-content">
@@ -82,26 +87,38 @@
 			<span>Домашние задания</span>
 		</header>
 		<section class="--flex-col">
-			<CardButton
-				icon="file"
-				label="Тест"
-				topic="Тема 1: «Урок 1»"
-				is_completed="false"
-				onclick={() => {
-					goto(`/course/${data.slug}/${data.topic}/${data.lesson}/@test_1`);
-				}}
-			>
-				<StatusNormal timestamp={new Date(2025, 11, 15)} />
-			</CardButton>
-			<CardButton
-				icon="file"
-				label="Тест"
-				topic="Тема 4: «Урок 1»"
-				is_completed="true"
-				onclick={() => {}}
-			>
-				<StatusPending />
-			</CardButton>
+			{#await API.getLessonTasks(data.course.id, data.lesson.id)}
+				<Spinner />
+			{:then tasks}
+				{#if tasks.length === 0}
+					<section class="--apply-block" style="opacity: 0.25;">Пусто</section>
+				{:else}
+					{#each tasks as task}
+						{#if task.grade == null}
+							<CardButton
+								icon={getTaskIcon(task.type)}
+								label={task.name}
+								topic={task.details}
+								is_completed={task.is_submitted}
+								onclick={() => {
+									goto(`/course/${data.course.id}/${task.type}:${task.id}`);
+								}}
+							>
+								{#if task.is_submitted}
+									<StatusPending />
+								{:else}
+									<StatusAuto timestamp={task.timestamp} />
+								{/if}
+							</CardButton>
+						{/if}
+					{/each}
+				{/if}
+			{:catch error}
+				<span class="error-label">
+					<Icon icon="exclamation" />
+					Ошибка: {error.message}
+				</span>
+			{/await}
 		</section>
 	</section>
 </Main>

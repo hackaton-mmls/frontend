@@ -290,8 +290,8 @@ export const API = {
 				type: TaskType.ESSAY,
 				name: 'Сочинение',
 				details: 'Тема 2: «Урок 4»',
-				is_submitted: true,
-				timestamp: new Date(2025, 11, 15),
+				is_submitted: false,
+				timestamp: new Date(2025, 11, 2),
 				task: {
 					min_words: 100
 				}

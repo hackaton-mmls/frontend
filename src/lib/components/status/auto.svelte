@@ -7,7 +7,7 @@
 	let { timestamp } = $props();
 </script>
 
-{#if getTimeDiff(new Date(), timestamp) <= 1}
+{#if getTimeDiff(new Date(), timestamp) <= 0}
 	<StatusToday {timestamp} />
 {:else if getTimeDiff(new Date(), timestamp) <= 3}
 	<StatusAlert {timestamp} />

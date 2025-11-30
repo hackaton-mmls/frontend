@@ -269,7 +269,7 @@ export const API = {
 					}
 				},
 				task: {
-					min_words: 100
+					allowed: ['application/pdf']
 				}
 			}
 		];

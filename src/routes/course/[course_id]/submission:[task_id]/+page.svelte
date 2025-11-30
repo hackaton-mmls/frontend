@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getTimeDiffString } from '$lib';
+	import type { SubmissionTask } from '$lib/api';
 	import Navigate from '$lib/components/button/navigate.svelte';
 	import Icon from '$lib/components/icon.svelte';
 	import Main from '$lib/components/layout/main.svelte';
@@ -17,21 +19,31 @@
 	}
 </script>
 
+<nav class="--font-rubik --flex-row --pad --gaps">
+	<Icon icon="symbol_hashtag" />
+	<a href="/course/{data.course.id}">{data.course.name}</a>
+	<Icon icon="angle_right" />
+	<a href="?">Домашние задания</a>
+	<Icon icon="angle_right" />
+	<a href="?">{data.task.name} — {data.task.details}</a>
+</nav>
+
 <header class="tracker --flex-row --pad-even --gaps-double">
-	<ProgressBar percentage={Number(files.acceptedFiles.length > 0) * 100} />
+	<span class="gap"></span>
 	<span class="--font-rubik --flex-row --gaps-half">
 		<Icon icon="clock" />
-		00:11:00
+		{getTimeDiffString(new Date(), data.task.timestamp)}
 	</span>
 </header>
+
 <Main>
 	<div class="--flex-col --width-content">
-		<h1>{data.task_name}</h1>
-		<h3>«{data.topic_name}: {data.lesson_name}»</h3>
+		<h1>{data.task.name}</h1>
+		<h3>{data.task.details}</h3>
 	</div>
 	<section class="--width-content">
 		<Dropzone
-			accept={['application/pdf']}
+			accept={(data.task.task as SubmissionTask).allowed}
 			maxSize={10 * 1024 * 1024 * 1024}
 			multiple={true}
 			onDrop={handleFilesSelect}
@@ -40,7 +52,7 @@
 	{#each files.acceptedFiles as file}
 		<section class="uploaded-file --apply-foreground --width-content-padded">
 			<span>{file.name}</span>
-			<ProgressBar percentage={100} />
+			<ProgressBar percentage={0} />
 		</section>
 	{/each}
 	{#if files.acceptedFiles.length > 0}

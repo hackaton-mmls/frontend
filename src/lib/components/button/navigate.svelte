@@ -4,7 +4,7 @@
 	let { icon, label, onclick } = $props();
 </script>
 
-<button class="--apply-block" {onclick}>
+<button class="--apply-block" {onclick} type="submit">
 	{#if icon.length > 0}
 		<Icon {icon} />
 	{/if}

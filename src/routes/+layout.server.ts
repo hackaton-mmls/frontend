@@ -1,7 +1,15 @@
-import { API } from '$lib/api';
+import { redirect } from '@sveltejs/kit';
 
-export async function load({ params }) {
+const publicRoutes = ['/login'];
+
+export async function load({ locals, url }) {
+	const pathname = url.pathname;
+
+	if (locals.user == null && !publicRoutes.includes(pathname)) {
+		return redirect(302, '/login');
+	}
+
 	return {
-		user: await API.getUser()
+		user: locals.user
 	};
 }

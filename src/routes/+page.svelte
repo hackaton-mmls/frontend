@@ -5,7 +5,6 @@
 	import CardButton from '$lib/components/button/card.svelte';
 	import StatusAuto from '$lib/components/status/auto.svelte';
 	import StatusPending from '$lib/components/status/pending.svelte';
-	import StatusDone from '$lib/components/status/done.svelte';
 	import { API, getTaskIcon, getUserFullName } from '$lib/api.js';
 	import Spinner from '$lib/components/spinner.svelte';
 	import { goto } from '$app/navigation';
@@ -18,7 +17,7 @@
 		<header class="--flex-row --gaps">
 			<div class="avatar --flex-row --font-rubik">{getUserFullName(data.user).charAt(0)}</div>
 			<div class="--flex-col" style="width: 50%;">
-				<h2 class="--font-rubik">Иван Иванов</h2>
+				<h2 class="--font-rubik">{getUserFullName(data.user)}</h2>
 				<div class="--flex-row --gaps-half">
 					<span>Успеваемость:</span>
 					{#await API.getUserPerformance()}

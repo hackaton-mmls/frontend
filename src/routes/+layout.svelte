@@ -16,13 +16,15 @@
 	<a href="/" data-current={page.url.pathname === '/'}> Мои курсы </a>
 	<a href="/grades" data-current={page.url.pathname.startsWith('/grades')}> Оценки </a>
 	<span class="gap"></span>
-	<NavigateButton
-		icon="user"
-		label={getUserFullName(data.user)}
-		onclick={() => {
-			goto('/profile');
-		}}
-	/>
+	{#if data.user != null}
+		<NavigateButton
+			icon="user"
+			label={getUserFullName(data.user)}
+			onclick={() => {
+				goto('/profile');
+			}}
+		/>
+	{/if}
 </header>
 
 {@render children()}

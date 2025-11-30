@@ -2,7 +2,7 @@
 	let { filesize } = $props();
 </script>
 
-<div class="status">
+<div class="status --flex-row --pad-small --gaps-small">
 	<span>{(Math.round((filesize / 1024 / 1024) * 10) / 10).toFixed(1)} MiB</span>
 </div>
 

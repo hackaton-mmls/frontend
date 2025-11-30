@@ -7,7 +7,7 @@
 </script>
 
 {#snippet field()}
-	<div class="input-field">
+	<div class="input-field --flex-row --gaps">
 		<Icon {icon} />
 		<span class="vbar"></span>
 		<input {type} {placeholder} autocomplete="off" bind:value />
@@ -17,25 +17,15 @@
 {#if label.length === 0}
 	{@render field()}
 {:else}
-	<div class="input-fieldset">
+	<div class="--flex-col --gaps-tiny">
 		<span class="label --font-rubik">{label}</span>
 		{@render field()}
 	</div>
 {/if}
 
 <style>
-	.input-fieldset {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		gap: 0.25rem;
-	}
 	.input-field {
 		position: relative;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 1rem;
 		height: 2rem;
 		background-color: var(--color-foreground-shade);
 		border-radius: 0.5rem;

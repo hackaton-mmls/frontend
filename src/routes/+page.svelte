@@ -1,1 +1,1 @@
-<main>Привет!</main>
+<main class="--flex-col-center --gaps"></main>

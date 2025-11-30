@@ -9,48 +9,37 @@
 	}
 </script>
 
-<section class="tab-container">
-	<header>
-		<button disabled={left_selected} onclick={() => update(true)}>
-			<Icon icon={left_tab.icon} />
-			<span>{left_tab.name}</span>
-		</button>
-		<button disabled={!left_selected} onclick={() => update(false)}>
-			<Icon icon={right_tab.icon} />
-			<span>{right_tab.name}</span>
-		</button>
+{#snippet button(tab: { icon: string; name: string }, selected: boolean, sets: boolean)}
+	<button class="--apply-block" disabled={selected} onclick={() => update(sets)}>
+		<Icon icon={tab.icon} />
+		<span>{tab.name}</span>
+	</button>
+{/snippet}
+
+<section class="tab-container --flex-col --width-content">
+	<header class="--flex-row">
+		{@render button(left_tab, left_selected, true)}
+		{@render button(right_tab, !left_selected, false)}
 	</header>
-	<section style={left_selected ? '' : 'display: none;'}>
+	<section class="--flex-col" style={left_selected ? '' : 'display: none;'}>
 		{@render left()}
 	</section>
-	<section style={!left_selected ? '' : 'display: none;'}>
+	<section class="--flex-col" style={!left_selected ? '' : 'display: none;'}>
 		{@render right()}
 	</section>
 </section>
 
 <style>
 	.tab-container {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		width: 50rem;
 		background-color: var(--color-background-highlight);
 		border-radius: 1rem;
 
 		& > header {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
 			border-radius: 1rem 1rem 0 0;
 			overflow: hidden;
 
 			button {
 				background-color: var(--color-foreground-shade);
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				padding: 0.5rem 1rem;
-				gap: 1rem;
 				border: none;
 				border-radius: 0.5rem;
 				font-weight: 500;
@@ -85,9 +74,6 @@
 		:global section {
 			overflow: hidden;
 
-			display: flex;
-			flex-direction: column;
-			align-items: stretch;
 			background-color: var(--color-foreground);
 			color: var(--color-text);
 			border-radius: 0 0 1rem 1rem;

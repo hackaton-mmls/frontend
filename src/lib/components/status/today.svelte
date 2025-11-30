@@ -4,7 +4,7 @@
 	let { timestamp } = $props();
 </script>
 
-<div class="status">
+<div class="status --flex-row --pad-small --gaps-small">
 	<Icon icon="exclamation" />
 	<span
 		>до {(timestamp as Date).toLocaleTimeString('ru-RU', {

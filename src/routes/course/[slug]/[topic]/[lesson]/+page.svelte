@@ -8,7 +8,7 @@
 	let { data } = $props();
 </script>
 
-<nav class="--font-rubik">
+<nav class="--font-rubik --flex-row --pad --gaps">
 	<Icon icon="symbol_hashtag" />
 	<a href="/course/{data.slug}">{data.course_name}</a>
 	<Icon icon="angle_right" />
@@ -17,8 +17,8 @@
 	<a href="/course/{data.slug}/{data.topic}/{data.lesson}">{data.lesson_name}</a>
 </nav>
 
-<main>
-	<header>
+<main class="--flex-col-center --gaps">
+	<header class="--flex-col --width-content">
 		<h1 class="--font-rubik">{data.lesson_name}</h1>
 		<h3>
 			{data.timestamp.toLocaleString('ru-RU', { day: '2-digit', month: 'long', year: 'numeric' })}
@@ -30,18 +30,20 @@
 		src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
 		poster="https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217"
 		width="800"
+		class="--width-content"
 	>
+		<track kind="captions" />
 		Sorry, your browser doesn't support embedded videos, but don't worry, you can
 		<a href="https://archive.org/details/BigBuckBunny_124">download it</a>
 		and watch it with your favorite video player!
 	</video>
 
-	<section class="fieldset">
-		<header class="--font-rubik">
+	<section class="fieldset --flex-col --width-content">
+		<header class="--font-rubik --apply-block">
 			<Icon icon="connections" />
 			<span>Материалы к уроку</span>
 		</header>
-		<section>
+		<section class="--flex-col">
 			<CardButton icon="picture" label="Презентация" topic="" is_completed="false">
 				<StatusFilesize filesize={1.2 * 1024 * 1024} />
 			</CardButton>
@@ -63,12 +65,12 @@
 			</CardButton>
 		</section>
 	</section>
-	<section class="fieldset">
-		<header class="--font-rubik">
+	<section class="fieldset --flex-col --width-content">
+		<header class="--font-rubik --apply-block">
 			<Icon icon="folder_zip" />
 			<span>Домашние задания</span>
 		</header>
-		<section>
+		<section class="--flex-col">
 			<CardButton icon="file" label="Тест" topic="Тема 1: «Урок 1»" is_completed="false">
 				<StatusNormal timestamp={new Date(2025, 11, 15)} />
 			</CardButton>
@@ -81,14 +83,12 @@
 
 <style>
 	main > header {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		width: 50rem;
-
 		h1,
 		h3 {
 			margin: 0;
+		}
+
+		h1 {
 			font-size: 2rem;
 		}
 
@@ -99,30 +99,16 @@
 	}
 
 	video {
-		width: 50rem;
 		background-color: black;
 		border-radius: 0.5rem;
 	}
 
 	.fieldset {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		width: 50rem;
-
 		header {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			gap: 1rem;
-			padding: 0.5rem 1rem;
 			font-weight: 500;
 		}
 
 		section {
-			display: flex;
-			flex-direction: column;
-			align-items: stretch;
 			border-radius: 1rem;
 			overflow: hidden;
 		}

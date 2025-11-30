@@ -4,12 +4,12 @@
 	import InputField from '$lib/components/input/field.svelte';
 </script>
 
-<main>
+<main class="--flex-col-center --gaps">
 	<h1>Вход в систему как <span style="color: var(--color-blue);">студент</span></h1>
-	<section>
+	<section class="--apply-foreground">
 		<InputField icon="at_sign" type="text" placeholder="student@example.edu" label="Почта" />
 		<InputField icon="key" type="password" placeholder="Пароль" label="Пароль" />
-		<div>
+		<div class="--flex-row-reverse">
 			<ButtonNavigate
 				icon=""
 				label="Войти"
@@ -20,22 +20,3 @@
 		</div>
 	</section>
 </main>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		gap: 1rem;
-		background-color: var(--color-foreground);
-		padding: 1rem;
-		border-radius: 1rem;
-		color: var(--color-text);
-
-		div {
-			display: flex;
-			flex-direction: row-reverse;
-			align-items: center;
-		}
-	}
-</style>

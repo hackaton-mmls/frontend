@@ -15,12 +15,12 @@
 	let { data } = $props();
 </script>
 
-<nav class="--font-rubik">
+<nav class="--font-rubik --flex-row --pad --gaps">
 	<Icon icon="symbol_hashtag" />
 	<a href="/course/{data.slug}">{data.course_name}</a>
 </nav>
 
-<main>
+<main class="--flex-col-center --gaps">
 	<TabContainer
 		left_tab={{ icon: 'scroll', name: 'Уроки' }}
 		right_tab={{ icon: 'folder_zip', name: 'Домашние задания' }}

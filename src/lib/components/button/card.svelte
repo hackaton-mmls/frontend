@@ -4,7 +4,7 @@
 	let { children, icon, label, topic, is_completed } = $props();
 </script>
 
-<button data-completed={is_completed}>
+<button class="--apply-block" data-completed={is_completed}>
 	<Icon {icon} />
 	<span class="--font-rubik">{label}</span>
 	{#if topic.length !== 0}
@@ -18,13 +18,8 @@
 
 <style>
 	button {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 1rem;
-		padding: 1rem;
-		font-size: 1rem;
 		background-color: var(--color-foreground);
+		font-size: 1rem;
 		border: none;
 		cursor: pointer;
 

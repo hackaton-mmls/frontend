@@ -4,7 +4,7 @@
 	let { icon, label, onclick } = $props();
 </script>
 
-<button {onclick}>
+<button class="--apply-block" {onclick}>
 	{#if icon.length > 0}
 		<Icon {icon} />
 	{/if}
@@ -16,11 +16,6 @@
 <style>
 	button {
 		background-color: var(--color-foreground-shade);
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		padding: 0.5rem 1rem;
-		gap: 1rem;
 		border: none;
 		border-radius: 0.5rem;
 		font-weight: 500;

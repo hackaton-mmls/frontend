@@ -4,13 +4,13 @@
 </script>
 
 <details class="accordion">
-	<summary class="--font-rubik">
+	<summary class="--font-rubik --apply-block">
 		<Icon {icon} />
 		<span>{title}</span>
 		<span class="gap"> </span>
 		<Icon icon="angle_down" />
 	</summary>
-	<section>
+	<section class="--flex-col --gaps">
 		{@render children()}
 	</section>
 </details>
@@ -23,10 +23,6 @@
 		}
 
 		summary {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			gap: 1rem;
 			padding: 1rem;
 			list-style-type: none;
 			font-weight: 500;
@@ -38,11 +34,7 @@
 		}
 
 		& > section {
-			display: flex;
-			flex-direction: column;
-			align-items: stretch;
 			padding: 0 1rem 1rem 1rem;
-			gap: 1rem;
 		}
 
 		&:not(:open, :last-of-type) summary,

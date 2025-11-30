@@ -4,7 +4,7 @@
 	let { result } = $props();
 </script>
 
-<div class="status">
+<div class="status --flex-row --pad-small --gaps-small">
 	<Icon icon="checkmark" />
 	<span>{result}/5</span>
 </div>

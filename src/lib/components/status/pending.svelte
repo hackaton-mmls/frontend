@@ -2,7 +2,7 @@
 	import Icon from '$lib/components/icon.svelte';
 </script>
 
-<div class="status">
+<div class="status --flex-row --pad-small --gaps-small">
 	<Icon icon="clock" />
 	<span>на проверке</span>
 </div>

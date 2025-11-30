@@ -18,7 +18,7 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<header class="--font-rubik">
+<header class="--font-rubik --flex-row --gaps-double --pad-big">
 	<h1>Школа</h1>
 	<a href="/" data-current={page.url.pathname === '/'}> Мои курсы </a>
 	<a href="/grades" data-current={page.url.pathname.startsWith('/grades')}> Оценки </a>
@@ -59,11 +59,6 @@
 		}
 
 		#app > header {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			padding: 0.75rem 1.5rem;
-			gap: 2rem;
 			background-color: var(--color-foreground);
 
 			h1 {
@@ -90,12 +85,7 @@
 		}
 
 		#app > nav {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
 			background-color: var(--color-foreground-shade);
-			padding: 0.5rem 1rem;
-			gap: 1rem;
 
 			a {
 				color: inherit;
@@ -104,11 +94,7 @@
 		}
 
 		#app > main {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
 			padding: 4rem 0;
-			gap: 1rem;
 			color: var(--color-foreground);
 		}
 
@@ -134,12 +120,7 @@
 		}
 
 		.status {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			padding: 0.375rem 0.75rem;
 			border-radius: 0.5rem;
-			gap: 0.375rem;
 			font-size: 0.75rem;
 			font-weight: 600;
 			color: var(--color-text);
@@ -157,6 +138,94 @@
 			font-family: 'Rubik', sans-serif;
 			font-optical-sizing: auto;
 			font-style: normal;
+		}
+
+		.--flex-row {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		.--flex-row-reverse {
+			display: flex;
+			flex-direction: row-reverse;
+			align-items: center;
+		}
+
+		.--flex-col {
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.--flex-col-center {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.--gaps-small {
+			gap: 0.375rem;
+		}
+
+		.--gaps-half {
+			gap: 0.5rem;
+		}
+
+		.--gaps {
+			gap: 1rem;
+		}
+
+		.--gaps-double {
+			gap: 2rem;
+		}
+
+		.--pad-small {
+			padding: 0.375rem 0.75rem;
+		}
+
+		.--pad {
+			padding: 0.5rem 1rem;
+		}
+
+		.--pad-big {
+			padding: 0.75rem 1.5rem;
+		}
+
+		.--pad-even-small {
+			padding: 0.5rem;
+		}
+
+		.--pad-even {
+			padding: 1rem;
+		}
+
+		.--width-content {
+			width: 50rem;
+		}
+
+		.--apply-foreground {
+			display: flex;
+			flex-direction: column;
+			align-items: stretch;
+
+			padding: 1rem;
+
+			gap: 1rem;
+
+			background-color: var(--color-foreground);
+			color: var(--color-text);
+			border-radius: 1rem;
+		}
+
+		.--apply-block {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			padding: 0.5rem 1rem;
+
+			gap: 1rem;
 		}
 	}
 </style>

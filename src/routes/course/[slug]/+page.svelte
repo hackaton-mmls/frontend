@@ -11,6 +11,7 @@
 	import StatusPending from '$lib/components/status/pending.svelte';
 	import StatusDone from '$lib/components/status/done.svelte';
 	import { goto } from '$app/navigation';
+	import Main from '$lib/components/layout/main.svelte';
 
 	let { data } = $props();
 </script>
@@ -20,7 +21,7 @@
 	<a href="/course/{data.slug}">{data.course_name}</a>
 </nav>
 
-<main class="--flex-col-center --gaps">
+<Main>
 	<TabContainer
 		left_tab={{ icon: 'scroll', name: 'Уроки' }}
 		right_tab={{ icon: 'folder_zip', name: 'Домашние задания' }}
@@ -100,4 +101,4 @@
 			</CardButton>
 		{/snippet}
 	</TabContainer>
-</main>
+</Main>

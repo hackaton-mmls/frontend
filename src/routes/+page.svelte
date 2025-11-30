@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { USER } from '$lib';
+	import Main from '$lib/components/layout/main.svelte';
 	import ProgressBar from '$lib/components/progress_bar.svelte';
 </script>
 
-<main class="--flex-col-center --gaps">
+<Main>
 	<section class="--apply-foreground --width-content">
 		<header class="--flex-row --gaps">
 			<div class="avatar --flex-row --font-rubik">{USER.full_name().charAt(0)}</div>
@@ -17,7 +18,7 @@
 		</header>
 	</section>
 	<a href="/course/math">Go to Math</a>
-</main>
+</Main>
 
 <style>
 	h2 {

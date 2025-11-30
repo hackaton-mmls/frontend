@@ -5,6 +5,7 @@
 	import StatusPending from '$lib/components/status/pending.svelte';
 	import StatusFilesize from '$lib/components/status/filesize.svelte';
 	import { goto } from '$app/navigation';
+	import Main from '$lib/components/layout/main.svelte';
 
 	let { data } = $props();
 </script>
@@ -18,7 +19,7 @@
 	<a href="/course/{data.slug}/{data.topic}/{data.lesson}">{data.lesson_name}</a>
 </nav>
 
-<main class="--flex-col-center --gaps">
+<Main>
 	<header class="--flex-col --width-content">
 		<h1 class="--font-rubik">{data.lesson_name}</h1>
 		<h3>
@@ -103,7 +104,7 @@
 			</CardButton>
 		</section>
 	</section>
-</main>
+</Main>
 
 <style>
 	main > header {

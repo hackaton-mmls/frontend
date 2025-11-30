@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Icon from '$lib/components/icon.svelte';
 
-	let { children, icon, label, topic, is_completed } = $props();
+	let { children, icon, label, topic, is_completed, onclick } = $props();
 </script>
 
-<button class="--apply-block" data-completed={is_completed}>
+<button class="--apply-block" data-completed={is_completed} {onclick}>
 	<Icon {icon} />
 	<span class="--font-rubik">{label}</span>
 	{#if topic.length !== 0}

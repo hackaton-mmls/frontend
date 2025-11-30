@@ -44,22 +44,58 @@
 			<Accordion icon="folder" title="Тема 4">Пусто</Accordion>
 		{/snippet}
 		{#snippet right()}
-			<CardButton icon="pencil" label="Сочинение" topic="Тема 2: «Урок 1»" is_completed="false">
+			<CardButton
+				icon="pencil"
+				label="Сочинение"
+				topic="Тема 2: «Урок 1»"
+				is_completed="false"
+				onclick={() => {}}
+			>
 				<StatusToday timestamp={new Date()} />
 			</CardButton>
-			<CardButton icon="picture" label="Презентация" topic="Тема 3: «Урок 1»" is_completed="false">
+			<CardButton
+				icon="picture"
+				label="Презентация"
+				topic="Тема 3: «Урок 1»"
+				is_completed="false"
+				onclick={() => {}}
+			>
 				<StatusAlert timestamp={new Date(2025, 11, 1)} />
 			</CardButton>
-			<CardButton icon="file" label="Тест" topic="Тема 1: «Урок 1»" is_completed="false">
+			<CardButton
+				icon="file"
+				label="Тест"
+				topic="Тема 1: «Урок 1»"
+				is_completed="false"
+				onclick={() => {}}
+			>
 				<StatusNormal timestamp={new Date(2025, 11, 15)} />
 			</CardButton>
-			<CardButton icon="file" label="Тест" topic="Тема 4: «Урок 1»" is_completed="true">
+			<CardButton
+				icon="file"
+				label="Тест"
+				topic="Тема 4: «Урок 1»"
+				is_completed="true"
+				onclick={() => {}}
+			>
 				<StatusPending />
 			</CardButton>
-			<CardButton icon="file" label="Тест" topic="Тема 4: «Урок 1»" is_completed="true">
+			<CardButton
+				icon="file"
+				label="Тест"
+				topic="Тема 4: «Урок 1»"
+				is_completed="true"
+				onclick={() => {}}
+			>
 				<StatusDone result={4} />
 			</CardButton>
-			<CardButton icon="file" label="Тест" topic="Тема 4: «Урок 1»" is_completed="true">
+			<CardButton
+				icon="file"
+				label="Тест"
+				topic="Тема 4: «Урок 1»"
+				is_completed="true"
+				onclick={() => {}}
+			>
 				<StatusDone result={5} />
 			</CardButton>
 		{/snippet}

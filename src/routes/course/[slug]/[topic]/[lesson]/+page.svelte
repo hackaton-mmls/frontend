@@ -4,6 +4,7 @@
 	import StatusNormal from '$lib/components/status/normal.svelte';
 	import StatusPending from '$lib/components/status/pending.svelte';
 	import StatusFilesize from '$lib/components/status/filesize.svelte';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 </script>
@@ -45,7 +46,13 @@
 			<span>Материалы к уроку</span>
 		</header>
 		<section class="--flex-col">
-			<CardButton icon="picture" label="Презентация" topic="" is_completed="false">
+			<CardButton
+				icon="picture"
+				label="Презентация"
+				topic=""
+				is_completed="false"
+				onclick={() => {}}
+			>
 				<StatusFilesize filesize={1.2 * 1024 * 1024} />
 			</CardButton>
 			<CardButton
@@ -53,6 +60,7 @@
 				label="yandex.ru/some_additional_material"
 				topic=""
 				is_completed="false"
+				onclick={() => {}}
 			>
 				{#snippet children()}{/snippet}
 			</CardButton>
@@ -61,6 +69,7 @@
 				label="yandex.ru/some_additional_material"
 				topic=""
 				is_completed="false"
+				onclick={() => {}}
 			>
 				{#snippet children()}{/snippet}
 			</CardButton>
@@ -72,10 +81,24 @@
 			<span>Домашние задания</span>
 		</header>
 		<section class="--flex-col">
-			<CardButton icon="file" label="Тест" topic="Тема 1: «Урок 1»" is_completed="false">
+			<CardButton
+				icon="file"
+				label="Тест"
+				topic="Тема 1: «Урок 1»"
+				is_completed="false"
+				onclick={() => {
+					goto(`/course/${data.slug}/${data.topic}/${data.lesson}/@test_1`);
+				}}
+			>
 				<StatusNormal timestamp={new Date(2025, 11, 15)} />
 			</CardButton>
-			<CardButton icon="file" label="Тест" topic="Тема 4: «Урок 1»" is_completed="true">
+			<CardButton
+				icon="file"
+				label="Тест"
+				topic="Тема 4: «Урок 1»"
+				is_completed="true"
+				onclick={() => {}}
+			>
 				<StatusPending />
 			</CardButton>
 		</section>

@@ -157,6 +157,10 @@
 			align-items: center;
 		}
 
+		.--gaps-tiny {
+			gap: 0.25rem;
+		}
+
 		.--gaps-small {
 			gap: 0.375rem;
 		}

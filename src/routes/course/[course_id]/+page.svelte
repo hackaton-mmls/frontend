@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/icon.svelte';
 	import TabContainer from '$lib/components/container/tabs.svelte';
-	import InputField from '$lib/components/input/field.svelte';
 	import Accordion from '$lib/components/container/accordion.svelte';
 	import NavigateButton from '$lib/components/button/navigate.svelte';
 	import CardButton from '$lib/components/button/card.svelte';
@@ -27,10 +26,6 @@
 		right_tab={{ icon: 'folder_zip', name: 'Домашние задания' }}
 	>
 		{#snippet left()}
-			<div class="--requires-padding">
-				<!-- TODO: Make it functional -->
-				<InputField icon="search" type="text" placeholder="Поиск..." label="" />
-			</div>
 			{#await API.getCourseTopics(data.course.id)}
 				<Spinner />
 			{:then topics}

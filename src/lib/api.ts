@@ -4,6 +4,10 @@ export interface User {
 	last_name: string;
 }
 
+export function getUserFullName(user: User): string {
+	return user.first_name + ' ' + user.last_name;
+}
+
 export interface Course {
 	id: string;
 	name: string;
@@ -11,14 +15,14 @@ export interface Course {
 }
 
 export enum TaskType {
-	TEST = 'test',
+	QUIZ = 'quiz',
 	SUBMISSION = 'submission',
 	ESSAY = 'essay'
 }
 
 export function getTaskIcon(type: TaskType) {
 	switch (type) {
-		case TaskType.TEST:
+		case TaskType.QUIZ:
 			return 'file';
 		case TaskType.SUBMISSION:
 			return 'picture';
@@ -48,6 +52,7 @@ export interface Task {
 	is_submitted: boolean;
 	timestamp: Date;
 	grade?: Grade;
+	task: QuizTask | EssayTask | SubmissionTask;
 }
 
 export interface Attachment {
@@ -72,8 +77,28 @@ export interface Topic {
 	lessons: Lesson[];
 }
 
-export function getUserFullName(user: User): string {
-	return user.first_name + ' ' + user.last_name;
+export interface Option {
+	label: string;
+	is_correct: boolean;
+}
+
+export interface Question {
+	label: string;
+	points: number;
+	allow_multiple: boolean;
+	options: Option[];
+}
+
+export interface QuizTask {
+	questions: Question[];
+}
+
+export interface SubmissionTask {
+	allowed: string[];
+}
+
+export interface EssayTask {
+	min_words: number;
 }
 
 export const API = {
@@ -196,11 +221,12 @@ export const API = {
 			{
 				id: '001',
 				lesson: '001',
-				type: TaskType.TEST,
+				type: TaskType.QUIZ,
 				name: 'Тест',
 				details: 'Тема 1: «Урок 1»',
 				is_submitted: false,
-				timestamp: new Date(2025, 11, 15)
+				timestamp: new Date(2025, 11, 15),
+				task: {}
 			},
 			{
 				id: '002',
@@ -209,7 +235,8 @@ export const API = {
 				name: 'Сочинение',
 				details: 'Тема 2: «Урок 4»',
 				is_submitted: true,
-				timestamp: new Date(2025, 11, 15)
+				timestamp: new Date(2025, 11, 15),
+				task: {}
 			},
 			{
 				id: '003',
@@ -231,7 +258,8 @@ export const API = {
 						contents: 'Пример комментария от учителя.',
 						is_read: false
 					}
-				}
+				},
+				task: {}
 			}
 		];
 	}

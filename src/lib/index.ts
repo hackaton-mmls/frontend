@@ -18,3 +18,11 @@ export function getTimeDiffString(date1: Date, date2: Date): string {
 	}
 	return `осталось ${diff} дней`;
 }
+
+export const USER = {
+	first_name: 'Иван',
+	last_name: 'Иванов',
+	full_name(): string {
+		return this.first_name + ' ' + this.last_name;
+	}
+};

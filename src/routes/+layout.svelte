@@ -3,15 +3,8 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/state';
 	import NavigateButton from '$lib/components/button/navigate.svelte';
+	import { USER } from '$lib';
 	let { children } = $props();
-
-	let user = {
-		first_name: 'Иван',
-		last_name: 'Иванов',
-		full_name(): string {
-			return this.first_name + ' ' + this.last_name;
-		}
-	};
 </script>
 
 <svelte:head>
@@ -23,7 +16,7 @@
 	<a href="/" data-current={page.url.pathname === '/'}> Мои курсы </a>
 	<a href="/grades" data-current={page.url.pathname.startsWith('/grades')}> Оценки </a>
 	<span class="gap"></span>
-	<NavigateButton icon="user" label={user.full_name()} onclick={() => {}} />
+	<NavigateButton icon="user" label={USER.full_name()} onclick={() => {}} />
 </header>
 
 {@render children()}

@@ -4,13 +4,10 @@
 	import ProgressBar from '$lib/components/progress_bar.svelte';
 
 	let { data } = $props();
-
-	const min_length = 200;
-	let essay = $state('');
 </script>
 
 <header class="tracker --flex-row --pad-even --gaps-double">
-	<ProgressBar percentage={Math.min(Math.round((essay.length / min_length) * 100), 100)} />
+	<ProgressBar percentage={0} />
 	<span class="--font-rubik --flex-row --gaps-half">
 		<Icon icon="clock" />
 		00:11:00

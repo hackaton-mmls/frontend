@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Icon from '$lib/components/icon.svelte';
 	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/state';
 	import NavigateButton from '$lib/components/button/navigate.svelte';

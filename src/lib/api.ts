@@ -90,6 +90,7 @@ export interface Question {
 }
 
 export interface QuizTask {
+	duration_minutes: number;
 	questions: Question[];
 }
 
@@ -232,7 +233,55 @@ export const API = {
 				is_submitted: false,
 				timestamp: new Date(2025, 11, 15),
 				task: {
-					min_words: 100
+					duration_minutes: 11,
+					questions: [
+						{
+							label: 'Вопрос 1',
+							points: 2,
+							allow_multiple: false,
+							options: [
+								{
+									label: 'Ответ A',
+									is_correct: false
+								},
+								{
+									label: 'Ответ B',
+									is_correct: false
+								},
+								{
+									label: 'Ответ C',
+									is_correct: true
+								},
+								{
+									label: 'Ответ D',
+									is_correct: false
+								}
+							]
+						},
+						{
+							label: 'Вопрос 2',
+							points: 3,
+							allow_multiple: true,
+							options: [
+								{
+									label: 'Ответ A',
+									is_correct: true
+								},
+								{
+									label: 'Ответ B',
+									is_correct: false
+								},
+								{
+									label: 'Ответ C',
+									is_correct: true
+								},
+								{
+									label: 'Ответ D',
+									is_correct: false
+								}
+							]
+						}
+					]
 				}
 			},
 			{

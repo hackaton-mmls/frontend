@@ -14,7 +14,20 @@ export function getTimeDiffString(date1: Date, date2: Date): string {
 		return `опоздали на ${diff * -1} дней`;
 	}
 	if (diff == 0) {
-		return `осталось ${diff} дней`;
+		// https://stackoverflow.com/a/13904120
+		let delta = Math.abs((date2 as any) - (date1 as any)) / 1000;
+		let days = Math.floor(delta / 86400);
+		delta -= days * 86400;
+
+		let hours = Math.floor(delta / 3600) % 24;
+		delta -= hours * 3600;
+
+		let minutes = Math.floor(delta / 60) % 60;
+		delta -= minutes * 60;
+
+		let seconds = Math.floor(delta % 60); // in theory the modulus is not required
+
+		return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 	}
 	if (diff == 1) {
 		return `остался ${diff} день`;
@@ -23,4 +36,8 @@ export function getTimeDiffString(date1: Date, date2: Date): string {
 		return `осталось ${diff} дня`;
 	}
 	return `осталось ${diff} дней`;
+}
+
+export function addMinutes(date: Date, minutes: number): Date {
+	return new Date(date.getTime() + minutes * 60_000);
 }

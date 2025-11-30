@@ -8,7 +8,7 @@ export function load({ params }) {
 		topic_name: 'Тема 1',
 		lesson_name: 'Списки и кортежи',
 		timestamp: new Date(),
-		task_type: 'test',
+		task_type: 'submission',
 		task_name: 'Тест 1'
 	};
 }

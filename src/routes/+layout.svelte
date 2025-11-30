@@ -90,6 +90,20 @@
 			color: var(--color-foreground);
 		}
 
+		h1,
+		h3 {
+			margin: 0;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+
+		h3 {
+			opacity: 0.5;
+			font-size: 1rem;
+		}
+
 		.gap {
 			display: block;
 			margin: auto;

@@ -107,22 +107,6 @@
 </Main>
 
 <style>
-	:global main > header {
-		h1,
-		h3 {
-			margin: 0;
-		}
-
-		h1 {
-			font-size: 2rem;
-		}
-
-		h3 {
-			opacity: 0.5;
-			font-size: 1rem;
-		}
-	}
-
 	video {
 		background-color: black;
 		border-radius: 0.5rem;

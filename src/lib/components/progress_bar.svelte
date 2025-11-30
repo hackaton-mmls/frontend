@@ -1,8 +1,8 @@
 <script lang="ts">
-	let { percentage } = $props();
+	let { percentage, is_inverted = false } = $props();
 </script>
 
-<div class="progress-bar --flex-row --gaps-half">
+<div class="progress-bar --flex-row --gaps-half" data-inverted={is_inverted}>
 	<span class="indicator">
 		<span class="fill" style="width: {percentage}%"></span>
 	</span>
@@ -10,10 +10,6 @@
 </div>
 
 <style>
-	.progress-bar {
-		flex: 1;
-	}
-
 	.indicator {
 		display: flex;
 		background-color: var(--color-foreground-shade);
@@ -31,5 +27,19 @@
 
 	.label {
 		font-weight: 500;
+	}
+
+	.progress-bar {
+		flex: 1;
+
+		&[data-inverted='true'] {
+			.indicator {
+				background-color: var(--color-background-highlight);
+			}
+
+			.fill {
+				background-color: var(--color-foreground);
+			}
+		}
 	}
 </style>

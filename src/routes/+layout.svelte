@@ -105,6 +105,7 @@
 		}
 
 		.gap {
+			flex: 1;
 			display: block;
 			margin: auto;
 		}
@@ -212,6 +213,10 @@
 
 		.--width-content {
 			width: 50rem;
+		}
+
+		.--width-content-padded {
+			width: 48rem;
 		}
 
 		.--apply-foreground {

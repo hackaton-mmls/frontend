@@ -150,6 +150,18 @@
 			color: var(--color-text);
 		}
 
+		.subject-label {
+			text-decoration: underline;
+			text-decoration-thickness: 2px;
+			color: inherit;
+			font-weight: 500;
+			cursor: pointer;
+
+			&:hover {
+				color: var(--color-blue);
+			}
+		}
+
 		body,
 		button,
 		input,

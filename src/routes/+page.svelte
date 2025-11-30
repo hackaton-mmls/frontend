@@ -25,7 +25,7 @@
 	<div class="--flex-col">
 		<header class="--apply-block">
 			<Icon icon="symbol_hashtag" />
-			<a class="label --font-rubik" href="/course/math">Математика</a>
+			<a class="subject-label --font-rubik" href="/course/math">Математика</a>
 			<span class="gap"></span>
 			<ProgressBar percentage={85} is_inverted={true} />
 		</header>
@@ -56,7 +56,7 @@
 	<div class="--flex-col">
 		<header class="--apply-block">
 			<Icon icon="symbol_hashtag" />
-			<a class="label --font-rubik" href="/course/basic">Базовый Курс</a>
+			<a class="subject-label --font-rubik" href="/course/basic">Базовый Курс</a>
 			<span class="gap"></span>
 			<ProgressBar percentage={100} is_inverted={true} />
 		</header>
@@ -88,17 +88,5 @@
 		padding: 0.25rem 0;
 		border-radius: 1rem;
 		overflow: hidden;
-	}
-
-	.label {
-		text-decoration: underline;
-		text-decoration-thickness: 2px;
-		color: inherit;
-		font-weight: 500;
-		cursor: pointer;
-
-		&:hover {
-			color: var(--color-blue);
-		}
 	}
 </style>

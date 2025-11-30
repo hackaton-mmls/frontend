@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getTimeDiffString } from '$lib';
-	import type { EssayTask } from '$lib/api.js';
+	import { getUserFullName, type EssayTask, type User } from '$lib/api.js';
 	import Navigate from '$lib/components/button/navigate.svelte';
 	import Icon from '$lib/components/icon.svelte';
 	import Main from '$lib/components/layout/main.svelte';
@@ -37,12 +37,24 @@
 		<h1>{data.task.name}</h1>
 		<h3>{data.task.details}</h3>
 	</div>
-	<textarea class="--width-content-padded" placeholder="Пишите здесь..." bind:value={essay}
-	></textarea>
-	{#if percentage() === 100}
-		<section class="--flex-row-reverse --width-content">
-			<Navigate icon="file" label="Отправить" onclick={() => {}} />
-		</section>
+	{#if data.task.is_submitted}
+		{#if data.task.grade != null}
+			<section class="--apply-foreground --width-content">
+				<b>{getUserFullName(data.task.grade.comment?.author as User)}:</b>
+				<div>
+					{data.task.grade.comment?.contents}
+				</div>
+			</section>
+		{/if}
+		<textarea class="--width-content-padded" value={essay} disabled></textarea>
+	{:else}
+		<textarea class="--width-content-padded" placeholder="Пишите здесь..." bind:value={essay}
+		></textarea>
+		{#if percentage() === 100}
+			<section class="--flex-row-reverse --width-content">
+				<Navigate icon="file" label="Отправить" onclick={() => {}} />
+			</section>
+		{/if}
 	{/if}
 </Main>
 
@@ -73,6 +85,12 @@
 
 		&:focus {
 			outline: 2px solid var(--color-blue);
+		}
+
+		&[disabled] {
+			background-color: var(--color-foreground-shade);
+			border: none;
+			outline: none;
 		}
 	}
 </style>

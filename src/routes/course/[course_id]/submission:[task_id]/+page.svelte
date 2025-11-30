@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getTimeDiffString } from '$lib';
-	import type { SubmissionTask } from '$lib/api';
+	import { getUserFullName, type SubmissionTask, type User } from '$lib/api';
 	import Navigate from '$lib/components/button/navigate.svelte';
 	import Icon from '$lib/components/icon.svelte';
 	import Main from '$lib/components/layout/main.svelte';
@@ -41,14 +41,25 @@
 		<h1>{data.task.name}</h1>
 		<h3>{data.task.details}</h3>
 	</div>
-	<section class="--width-content">
-		<Dropzone
-			accept={(data.task.task as SubmissionTask).allowed}
-			maxSize={10 * 1024 * 1024 * 1024}
-			multiple={true}
-			onDrop={handleFilesSelect}
-		/>
-	</section>
+	{#if data.task.is_submitted}
+		{#if data.task.grade != null}
+			<section class="--apply-foreground --width-content">
+				<b>{getUserFullName(data.task.grade.comment?.author as User)}:</b>
+				<div>
+					{data.task.grade.comment?.contents}
+				</div>
+			</section>
+		{/if}
+	{:else}
+		<section class="--width-content">
+			<Dropzone
+				accept={(data.task.task as SubmissionTask).allowed}
+				maxSize={10 * 1024 * 1024 * 1024}
+				multiple={true}
+				onDrop={handleFilesSelect}
+			/>
+		</section>
+	{/if}
 	{#each files.acceptedFiles as file}
 		<section class="uploaded-file --apply-foreground --width-content-padded">
 			<span>{file.name}</span>

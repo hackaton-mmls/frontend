@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { addMinutes, getTimeDiffString } from '$lib';
-	import type { QuizTask } from '$lib/api.js';
+	import { getUserFullName, type QuizTask, type User } from '$lib/api.js';
 	import Navigate from '$lib/components/button/navigate.svelte';
 	import Icon from '$lib/components/icon.svelte';
 	import Main from '$lib/components/layout/main.svelte';
@@ -85,7 +85,14 @@
 {:else}
 	<Main>
 		{#if data.task.is_submitted}
-			Submitted
+			{#if data.task.grade != null}
+				<section class="--apply-foreground --width-content">
+					<b>{getUserFullName(data.task.grade.comment?.author as User)}:</b>
+					<div>
+						{data.task.grade.comment?.contents}
+					</div>
+				</section>
+			{/if}
 		{:else}
 			<section class="--flex-col --width-content">
 				<h1>Начать тест?</h1>

@@ -98,7 +98,9 @@
 		}
 
 		h1,
-		h3 {
+		h2,
+		h3,
+		h4 {
 			margin: 0;
 		}
 
@@ -122,6 +124,14 @@
 			background-color: var(--color-text);
 			height: 1rem;
 			width: 2px;
+			opacity: 0.2;
+		}
+
+		.hbar {
+			display: block;
+			background-color: var(--color-text);
+			min-height: 2px;
+			flex: 1;
 			opacity: 0.2;
 		}
 
